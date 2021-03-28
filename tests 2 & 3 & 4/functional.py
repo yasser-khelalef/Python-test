@@ -1,9 +1,8 @@
 def sum_of_int_str_items(list_of_strings):
 
-    # In this function, list items that are already of type integer are accepted
 
-    # Assuring that the input is a list
-    if type(list_of_strings)==list:
+    # Assuring that the input is a none empty list containing only string elements
+    if type(list_of_strings)==list and len(list_of_strings)>=1 and all([isinstance(x,str) for x in list_of_strings]):
 
 
         # Initializing the sum of the items to 0
@@ -30,9 +29,9 @@ def sum_of_int_str_items(list_of_strings):
                 pass
 
     else:
-        return print("Please enter a valid input ( a list of strings )")
+        return "Please enter a valid input ( a list of strings )"
 
-    return print("The sum of integer items in the given list is : ",sum_of_items)
+    return sum_of_items
 
 
 def persistence(number):
@@ -69,6 +68,35 @@ def persistence(number):
         return "Please enter an integer"
             
 
-        
+def sum_consecutives(list_of_integers):
+    # Assuring the input is a none empty list with items that are all integers
+    if type(list_of_integers) == list and len(list_of_integers)>=1 and all([isinstance(x,int) for x in list_of_integers]):
+        list_of_integers2 = [x for x in list_of_integers]
+        # Initializing a pivot element as a reference
+        pivot = list_of_integers2[0]
+        result = list()
 
-        
+
+        # Adding the pivot to the result list
+        result.append(pivot)
+        for i in range(1,len(list_of_integers2)):
+        # Iterating through the element of the input list starting from the second element
+            #Adding that following element to the result list
+            result.append(list_of_integers2[i])
+            if list_of_integers2[i] != pivot :
+                '''
+                If that second element is not equal to the pivot, then the result list is maintained and the
+                pivot is changed to the following element
+                '''
+                pivot = list_of_integers2[i]
+            else:
+                '''
+                If the elemnt following the pivot is equal to it, that element is removed, and the last item
+                of the remaining values in the result list is incremented by the pivot value
+                '''
+                result.pop()
+                result[-1] += pivot
+
+        return result
+    else:
+        return "Enter valid input (List of integers)"
